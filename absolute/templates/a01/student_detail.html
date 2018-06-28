@@ -1,0 +1,106 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-right" colspan="4">
+          Ерөнхий мэдээлэл
+        </th>
+        <th>
+            <a href="{% url 'student' %}" class="btn btn-sm btn-alert pull-right">&nbsp;Буцах</a>
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center">
+          Овог
+        </th>
+        <th class="text-center">
+          Нэр
+        </th>
+        <th class="text-center">
+          Регистэр
+        </th>
+        <th class="text-center">
+          Төрсөн өдөр
+        </th>
+        <th class="text-center">
+          Утасны дугаар
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="text-center">
+          {{obj.lname}}
+        </td>
+        <td class="text-center">
+          {{obj.fname}}
+        </td>
+        <td class="text-center">
+          {{obj.register}}
+        </td>
+        <td class="text-center">
+            {{obj.birthday}}
+        </td>
+        <td class="text-center">
+          {{obj.phone}}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-right" colspan="3">
+          Суралцсан ангиудын мэдээлэл
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center">
+          Түвшин
+        </th>
+        <th class="text-center">
+          Эхэлсэн огноо
+        </th>
+        <!-- <th class="text-center">
+          Багшын нэрс
+        </th> -->
+        <th class="text-center">
+          Тайлбар
+        </th>
+        <!-- <th class="text-center">
+          Төлсөн төлбөр
+        </th> -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for each in classes %}
+        <tr class="table table-striped">
+          <td>
+            {{each.course.ctype}}
+          </td>
+          <td>
+            {{each.course.start_date}}
+          </td>
+          <td>
+            {{each.course.info}}
+          </td>
+
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="text-center" colspan="3">
+            Хоосон байна.
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}

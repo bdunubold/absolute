@@ -1,0 +1,191 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th colspan="5">
+          Ерөнхий мэдээлэл
+        </th>
+        <th width="20%">
+            <div class="btn-group pull-right">
+                <a href="{% url 'contract_change' id %}" class="btn btn-warning btn-sm">Анги солих</a>
+                <a href="{% url 'contract' %}" class="btn btn-alert btn-sm pull-left">&nbsp;Буцах</a>
+            </div>
+        </th>
+      </tr>
+      <tr>
+          <th class="text-center">
+            Гэрээний дугаар
+          </th>
+        <th class="text-center">
+          Хичээл
+        </th>
+        <th class="text-center">
+          Гэрээний огноо
+        </th>
+        <th class="text-center">
+          Хасагдсан цаг
+        </th>
+        <th class="text-center">
+          Хямдрал
+        </th>
+        <th width="15%" class="text-center">
+          Нийт төлбөр
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+          <td class="text-center">
+            {{obj.contract_number}}
+          </td>
+        <td class="text-center">
+          {{obj.course}}
+        </td>
+        <td class="text-center">
+          {{obj.date}}
+        </td>
+        <td class="text-center">
+          {{obj.minus_length}}
+        </td>
+        <td class="text-center">
+          {{obj.off_percent}} %
+        </td>
+        <td class="text-center money">
+          {{obj.total_payment}}
+        </td>
+
+      </tr>
+      <tr>
+          <th class="text-center">
+            Тайлбар
+          </th>
+          <td colspan="5" class="text-center">
+              {% if obj.description %}
+                  {{obj.description}}
+              {% endif %}
+          </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th colspan="8">
+          Сурагчийн мэдээлэл
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center">
+          Овог
+        </th>
+        <th class="text-center">
+          Нэр
+        </th>
+        <th class="text-center">
+          Регистэр
+        </th>
+        <th class="text-center">
+          Төрсөн өдөр
+        </th>
+        <th class="text-center">
+          Утасны дугаар
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+          <td class="text-center">
+            {{obj.student.lname}}
+          </td>
+          <td class="text-center">
+            {{obj.student.fname}}
+          </td>
+          <td class="text-center">
+            {{obj.student.register}}
+          </td>
+          <td class="text-center">
+              {{obj.student.birthday}}
+          </td>
+          <td class="text-center">
+            {{obj.student.phone}}
+          </td>
+        </tr>
+
+    </tbody>
+  </table>
+
+
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th colspan="5">
+                Дутуу төлбөр : <div class="money">
+                    {% if payment < 0 %} 0 {% else %} {{payment}} {% endif %}
+                </div>
+            </th>
+        </tr>
+      <tr>
+        <th class="text-right" colspan="5">
+          Гүйлгээнүүд
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center">
+          Огноо
+        </th>
+        <th class="text-center">
+          Төрөл
+        </th>
+        <th class="text-center">
+          Гүйлгээ хийгдсэн арга
+        </th>
+        <th class="text-center">
+          Дүн
+        </th>
+        <th class="text-center">
+          Тайлбар
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for each in txns %}
+
+        <tr>
+          <td>
+            {{each.txn_date}}
+          </td>
+          <td>
+            {{each.get_txn_type}}
+          </td>
+          <td>
+            {{each.get_txn_method}}
+          </td>
+          <td class="money">
+            {{each.amount}}
+          </td>
+          <td>
+            {% if each.description %}
+                {{each.description}}
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="text-center" colspan="4">
+            Хоосон байна.
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}

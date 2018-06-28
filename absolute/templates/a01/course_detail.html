@@ -1,0 +1,130 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th colspan="2">
+          Ерөнхий мэдээлэл
+        </th>
+        <th>
+            <a href="{% url 'course' %}" class="btn btn-sm btn-alert pull-right">&nbsp;Буцах</a>
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center">
+          Төрөл
+        </th>
+        <th class="text-center">
+          Эхэлсэн цаг өдөр
+        </th>
+        <th class="text-center">
+          Тайлбар
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="text-center">
+          {{obj.ctype}}
+        </td>
+        <td class="text-center">
+          {{obj.start_date}}
+        </td>
+        <td class="text-center">
+          {{obj.info}}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th colspan="2">
+                  Багш нар
+              </th>
+          </tr>
+          <tr>
+              <th>
+                  Багш
+              </th>
+              <th>
+                  Сэдэв
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for each in teachers %}
+              <tr>
+                  <td>
+                      {{each.teacher}}
+                  </td>
+                  <td>
+                      {{each.lesson}}
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-right" colspan="4">
+          Сурагчид : {{total_student}}
+        </th>
+      </tr>
+      <tr>
+        <th>
+        </th>
+        <th class="text-center">
+          Овог
+        </th>
+        <th class="text-center">
+          Нэр
+        </th>
+        <th class="text-center">
+          Утасны дугаар
+        </th>
+        <th class="text-center">
+          Дутуу төлбөр
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for each in contracts %}
+
+        <tr>
+          <td>
+            {{ forloop.counter }}
+          </td>
+          <td>
+            {{each.student.lname}}
+          </td>
+          <td>
+            {{each.student.fname}}
+          </td>
+          <td>
+            {{each.student.phone}}
+          </td>
+          <td class="money">
+            {% if each.remainder_payment < 0 %} 0 {% else %} {{each.remainder_payment}} {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="text-center" colspan="2">
+            Хоосон байна.
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+
+
+<script  type="text/javascript">
+
+$( document ).ready(function() {
+    $('.datetimepicker').datetimepicker(
+      {
+         format: 'm/d/Y H:i'
+      }
+    );
+
+    $('.link-formset').formset({
+        addText: 'Нэмэх',
+        deleteText: 'Устгах'
+    });
+
+});
+
+
+
+</script>
+
+<div class="container">
+
+  <h2>Анги бүртгэл</h2><br>
+  <form method="post">
+    {% csrf_token %}
+    <div class="col-sm-5">
+      <div class="form-group">
+        {{ form.ctype.label_tag }}
+        {{ form.ctype }}
+      </div>
+      <div class="form-group">
+        {{ form.start_date.label_tag }}
+        {{ form.start_date }}
+      </div>
+      <div class="form-group">
+        {{ form.info.label_tag }}
+        {{ form.info }}
+      </div>
+
+      <div class="form-group">
+        {{ form.flag.label_tag }}
+        {{ form.flag }}
+      </div>
+
+
+          <div class="btn-toolbar">
+            <button class="btn btn-sm btn-info" type="submit">Хадгалах</button>
+            <a href="{% url 'course' %}" class="btn btn-sm grey">Буцах</a>
+          </div>
+
+    </div>
+
+    <div class="col-sm-7">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Багш
+                    </th>
+                    <th>
+                        Сэдэв
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for each in teacher_form %}
+                <tr class="link-formset">
+                    <td>
+                        {{ each.teacher }}
+                    </td>
+                    <td>
+                        {{ each.lesson }}
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ teacher_form.management_form }}
+    </div>
+
+    </form>
+
+</div>
+{% if form.errors %}
+  <p>{{form.errors}}</p>
+{% endif %}
+
+{% endblock %}

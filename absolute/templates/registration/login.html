@@ -1,0 +1,26 @@
+{% extends 'master.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <h2>Нэвтрэх</h2>
+  <form method="post">
+
+    {% csrf_token %}
+    <div class="col-sm-5">
+        <div class="form-group">
+            <label for="id_username">Нэр:</label>
+            <input class="form-control" autofocus="" id="id_username" maxlength="254" name="username" type="text" required="">
+        </div>
+        <div class="form-group">
+            <label for="id_password">Нууц үг:</label>
+            <input class="form-control" id="id_password" name="password" type="password" required="">
+        </div>
+        <button class="btn btn-success btn-sm" type="submit">Нэвтрэх</button>
+    </div>
+  </form>
+
+  {% if form.errors %}
+    <p>Таны Нууц үг эсвэл хэрэглэгчийн нэр буруу байна.</p>
+  {% endif %}
+
+{% endblock %}

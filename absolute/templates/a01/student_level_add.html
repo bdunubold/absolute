@@ -1,0 +1,58 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+
+
+<script  type="text/javascript">
+
+$( document ).ready(function() {
+    $('.datetimepicker').datetimepicker(
+      {
+        format:	'm/d/Y',
+        timepicker:false,
+      }
+    );
+});
+
+
+</script>
+
+<div class="container">
+
+  <h2>Түвшин бүртгэл</h2><br>
+  <form method="post">
+    {% csrf_token %}
+    <div class="col-sm-5">
+
+      <div class="form-group">
+        {{ form.course.label_tag }}
+        {{ form.course }}
+      </div>
+
+      <div class="form-group">
+        {{ form.level.label_tag }}
+        {{ form.level }}
+      </div>
+
+      <div class="form-group">
+        {{ form.date.label_tag }}
+        {{ form.date }}
+      </div>
+
+
+      <div class="btn-group">
+            <button class="btn btn-sm btn-info" type="submit">Хадгалах</button>
+            <a href="{% url 'student' %}" class="btn btn-sm grey">Буцах</a>
+      </div>
+
+    </div>
+
+    </form>
+
+</div>
+{% if form.errors %}
+  <p>{{form.errors}}</p>
+{% endif %}
+
+{% endblock %}

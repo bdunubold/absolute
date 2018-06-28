@@ -1,0 +1,80 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+
+<script  type="text/javascript">
+
+function dailygiver() {
+
+  var price = $('#id_price').val();
+  var length = $('#id_length').val();
+  if (price && length) {
+
+    var hourly_price = price/length;
+
+    $('#id_hourly_price').val(Math.round(hourly_price));
+
+  }
+
+}
+
+    $(document).on('change', '#id_price', function() {
+      dailygiver();
+    });
+
+
+    $(document).on('change', '#id_length', function() {
+      dailygiver();
+    });
+
+
+</script>
+
+
+<h2>Түвшин бүртгэл</h2><br>
+<form method="post">
+  {% csrf_token %}
+  <div class="col-sm-5">
+    <div class="form-group">
+      {{ form.level.label_tag }}
+      {{ form.level }}
+    </div>
+
+    <div class="form-group">
+      {{ form.price.label_tag }}
+      {{ form.price }}
+    </div>
+
+    <div class="form-group">
+      {{ form.length.label_tag }}
+      {{ form.length }}
+    </div>
+
+    <div class="form-group">
+      {{ form.hourly_price.label_tag }}
+      {{ form.hourly_price }}
+    </div>
+
+
+    <div class="form-group">
+      {{ form.info.label_tag }}
+      {{ form.info }}
+    </div>
+
+      <div class="btn-toolbar">
+        <button class="btn btn-sm btn-info" type="submit">Хадгалах</button>
+        <a href="{% url 'course_type' %}" class="btn btn-sm grey">Буцах</a>
+      </div>
+
+  </div>
+
+  </form>
+
+{% if form.errors %}
+  <p>{{form.errors}}</p>
+{% endif %}
+
+
+
+{% endblock %}

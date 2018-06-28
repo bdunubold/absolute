@@ -1,0 +1,130 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+
+
+<script  type="text/javascript">
+
+$( document ).ready(function() {
+
+
+    var d = document.getElementById("id_fname");
+    d.className += " form-control";
+
+    var c = document.getElementById("id_register");
+    c.className += " form-control";
+
+    var a = document.getElementById("id_phone");
+    a.className += " form-control";
+
+});
+
+
+</script>
+
+
+
+    <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Шүүлтүүр</h4>
+            </div>
+            <form class="" action="" method="get" target="">
+                <div class="modal-body">
+                  <div class="form-group">
+                      {{filter.form.fname.label_tag}}
+                      {{filter.form.fname}}
+                  </div>
+                  <div class="form-group">
+                      {{filter.form.register.label_tag}}
+                      {{filter.form.register}}
+                  </div>
+                  <div class="form-group">
+                      {{filter.form.phone.label_tag}}
+                      {{filter.form.phone}}
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-info" type="submit">Шүүх</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Хаах</button>
+                </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="btn-group pull-right">
+            <a href="{% url 'student_add' %}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> &nbsp;Сурагч бүртгэл</a>
+            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">Шүүх</button>
+        </div>
+    </div>
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-center">
+          Овог
+        </th>
+        <th class="text-center">
+          Нэр
+        </th>
+        <th class="text-center">
+          Регистэр
+        </th>
+        <th class="text-center">
+          Утасны дугаар
+        </th>
+        <th>
+
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for each in filter.qs %}
+      <tr class="link" onclick="window.document.location='{{each.pk}}';">
+        <td class="text-center">
+          {{each.lname}}
+        </td>
+        <td class="text-center">
+          {{each.fname}}
+        </td>
+        <td class="text-center">
+          {{each.register}}
+        </td>
+        <td class="text-center">
+          {{each.phone}}
+        </td>
+        <td>
+            <div class="btn-group pull-right">
+                <a href="{% url 'student_level_add' each.pk %}" class="btn btn-primary btn-sm">Түвшин бүртгэх</a>
+                <a href="{% url 'student_contract' each.pk %}" class="btn btn-success btn-sm">Гэрээ хийх</a>
+                <a href="{% url 'student_edit' each.pk %}" class="btn btn-warning btn-sm">Засах</a>
+                <a href="{% url 'student_delete' each.pk %}" class="btn btn-alert btn-sm">Устгах</a>
+            </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td class="text-center" colspan="5">
+          Хоосон байна.
+        </td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock %}

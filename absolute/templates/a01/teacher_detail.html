@@ -1,0 +1,94 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-right" colspan="5">
+          Ерөнхий мэдээлэл
+        </th>
+        <th>
+            <a href="{% url 'teacher' %}" class="btn btn-sm btn-alert pull-right">&nbsp;Буцах</a>
+        </th>
+      </tr>
+      <tr>
+        <th class="text-center">
+            Нэр
+        </th>
+        <th class="text-center">
+            Овог
+        </th>
+        <th class="text-center">
+            Регистрийн дугаар
+        </th>
+        <th class="text-center">
+            Утасны дугаар
+        </th>
+        <th class="text-center">
+            Төрсөн он сар өдөр
+        </th>
+        <th class="text-center">
+            Цагын ажлын хөлс
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="text-center">
+          {{obj.fname}}
+        </td>
+        <td class="text-center">
+          {{obj.lname}}
+        </td>
+        <td class="text-center">
+          {{obj.register}}
+        </td>
+        <td class="text-center">
+          {{obj.phone}}
+        </td>
+        <td class="text-center">
+          {{obj.birthday}}
+        </td>
+        <td class="text-center">
+          {{obj.hourly_wage}}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+        </th>
+        <th class="text-center">
+          Анги
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for each in courses %}
+
+        <tr>
+          <td>
+            {{ forloop.counter }}
+          </td>
+          <td>
+            {{each.course}}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="text-center" colspan="2">
+            Хоосон байна.
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}

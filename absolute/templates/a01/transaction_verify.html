@@ -1,0 +1,12 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+
+<form action="" method="post">{% csrf_token %}
+    <p>Энэ гүйлгээг баталгаажуулахдаа итгэлтэй байна уу "{{ object }}"?</p>
+    <input class="btn btn-sm" type="submit" value="Баталгаажуулах" />
+    <a href="{% url 'transaction' %}" class="btn btn-sm btn-info">Буцах</a>
+</form>
+
+{% endblock %}

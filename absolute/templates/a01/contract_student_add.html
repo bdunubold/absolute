@@ -1,0 +1,82 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+
+<script  type="text/javascript">
+
+$( document ).ready(function() {
+    $('.datetimepicker').datetimepicker(
+      {
+        format:	'm/d/Y',
+        timepicker:false,
+      }
+    );
+});
+
+
+</script>
+
+
+<h2>Гэрээ бүртгэл</h2><br>
+<form method="post">
+  {% csrf_token %}
+  <div class="col-sm-5">
+
+      <div class="form-group">
+        {{ form.con_date.label_tag }}
+        {{ form.con_date }}
+      </div>
+    <div class="form-group">
+      {{ form.contract_number.label_tag }}
+      {{ form.contract_number }}
+    </div>
+    <div class="form-group">
+      {{ form.course.label_tag }}
+      {{ form.course }}
+    </div>
+
+    <div class="form-group">
+      {{ form.description.label_tag }}
+      {{ form.description }}
+    </div>
+
+      <div class="btn-toolbar">
+        <button class="btn btn-sm btn-info" type="submit">Хадгалах</button>
+        <a href="{% url 'student' %}" class="btn btn-sm grey">Буцах</a>
+      </div>
+
+  </div>
+  <div class="col-sm-5">
+
+
+        <div class="form-group">
+        {{ form.txn_method.label_tag }}
+        {{ form.txn_method }}
+        </div>
+
+        <div class="form-group">
+        {{ form.payment.label_tag }}
+        {{ form.payment }}
+        </div>
+
+        <div class="form-group">
+        {{ form.minus_length.label_tag }}
+        {{ form.minus_length }}
+        </div>
+        <div class="form-group">
+        {{ form.off_percent.label_tag }}
+        {{ form.off_percent }}
+        </div>
+
+  </div>
+
+  </form>
+
+{% if form.errors %}
+  <p>{{form.errors}}</p>
+{% endif %}
+
+
+
+{% endblock %}

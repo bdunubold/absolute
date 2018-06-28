@@ -1,0 +1,13 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+
+<form action="" method="post">{% csrf_token %}
+    <p>Энэ бичилтийг устгахдаа итгэлтэй байна уу "{{ object }}"?</p>
+    <input class="btn btn-sm" type="submit" value="Устгах" />
+    {% block back %}
+    {% endblock %}
+</form>
+
+{% endblock %}

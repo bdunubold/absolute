@@ -1,0 +1,49 @@
+{% extends 'master.html' %}
+{% block content %}
+<div class="container text-center">
+
+
+    <div class="row center fcont">
+        <div class="col-lg-12">
+            <p>
+                <a href="{% url 'course_type' %}" class="btn btn-squared-default-plain btn-primary">
+                    <i class="fa fa-book fa-5x"></i>
+                    <br />
+                    Хичээлийн түвшин
+                </a>
+                <a href="{% url 'course' %}" class="btn btn-squared-default-plain btn-success">
+                    <i class="fa fa-child fa-5x"></i>
+                    <br />
+                    Анги
+                </a>
+                <a href="{% url 'contract' %}" class="btn btn-squared-default-plain btn-info">
+                    <i class="fa fa-compass fa-5x"></i>
+                    <br />
+                    Гэрээ
+                </a>
+                <a href="{% url 'teacher' %}" class="btn btn-squared-default-plain btn-warning">
+                    <i class="fa fa-pencil fa-5x"></i>
+                    <br />
+                    Багш
+                </a>
+                <a href="{% url 'worker' %}" class="btn btn-squared-default-plain btn-success">
+                    <i class="fa fa-building fa-5x"></i>
+                    <br />
+                    Ажилтан
+                </a>
+                <a href="{% url 'transaction' %}" class="btn btn-squared-default-plain btn-danger">
+                    <i class="fa fa-list fa-5x"></i>
+                    <br />
+                    Гүйлгээ
+                </a>
+                <a href="{% url 'student_level' %}" class="btn btn-squared-default-plain btn-info">
+                    <i class="fa fa-star fa-5x"></i>
+                    <br />
+                    Түвшин
+                </a>
+
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

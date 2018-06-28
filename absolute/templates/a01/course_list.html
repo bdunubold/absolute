@@ -1,0 +1,139 @@
+{% extends 'master.html' %}
+{% block content %}
+
+
+<script  type="text/javascript">
+
+$( document ).ready(function() {
+
+
+    var d = document.getElementById("id_ctype");
+    d.className += " form-control";
+
+    var c = document.getElementById("id_flag");
+    c.className += " form-control";
+
+    var a = document.getElementById("id_start_date__gt");
+    a.className += " form-control datetimepicker";
+
+    var b = document.getElementById("id_start_date__lt");
+    b.className += " form-control datetimepicker";
+
+    $('.datetimepicker').datetimepicker(
+      {
+        format:	'm/d/Y',
+        timepicker:false,
+      }
+    );
+
+
+});
+
+
+</script>
+
+
+    <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Шүүлтүүр</h4>
+            </div>
+            <form class="" action="" method="get" target="">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="id_txn_date__gt">Эхлэх огноо:</label>
+                        {{filter.form.start_date__gt}}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_txn_date__gt">Дуусах огноо</label>
+                        {{filter.form.start_date__lt}}
+                    </div>
+
+                  <div class="form-group">
+                      {{filter.form.ctype.label_tag}}
+                      {{filter.form.ctype}}
+                  </div>
+                  <div class="form-group">
+                      {{filter.form.flag.label_tag}}
+                      {{filter.form.flag}}
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-info" type="submit">Шүүх</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Хаах</button>
+                </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-sm-6">
+                  <a href="{% url 'home' %}" class="btn btn-sm btn-alert pull-left">&nbsp;Буцах</a>
+          </div>
+          <div class="col-sm-6">
+              <div class="btn-group pull-right">
+                  <a href="{% url 'course_add' %}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> &nbsp;Анги бүртгэл</a>
+                  <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">Шүүх</button>
+              </div>
+          </div>
+      </div>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">
+          Төрөл
+        </th>
+        <th class="text-center">
+          Эхэлсэн цаг өдөр
+        </th>
+        <th class="text-center">
+          Тайлбар
+        </th>
+        <th>
+
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for each in filter.qs %}
+      <tr class="link" onclick="window.document.location='{{each.pk}}';">
+        <td class="text-center">
+          {{each.ctype}}
+        </td>
+        <td class="text-center">
+          {{each.start_date}}
+        </td>
+        <td class="text-center">
+          {{each.info}}
+        </td>
+        <td>
+            {% if each.flag %}
+              <div class="btn-group pull-right">
+                <a href="{% url 'course_edit' each.pk %}" class="btn btn-warning btn-sm">Засах</a>
+                <a href="{% url 'course_delete' each.pk %}" class="btn btn-alert btn-sm">Устгах</a>
+              </div>
+            {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td class="text-center" colspan="4">
+          Хоосон байна.
+        </td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock %}

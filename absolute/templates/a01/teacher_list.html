@@ -1,0 +1,84 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+
+      <div class="row">
+          <div class="col-sm-6">
+                  <a href="{% url 'home' %}" class="btn btn-sm btn-alert pull-left">&nbsp;Буцах</a>
+          </div>
+          <div class="col-sm-6">
+              <div class="btn-group pull-right">
+                  <a href="{% url 'teacher_add' %}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> &nbsp;Багш бүртгэл</a>
+                  <a href="{% url 'teacher_salary' %}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> &nbsp;Цалин бодох</a>
+                  <a href="{% url 'teacher_salary_detail' %}" class="btn btn-sm btn-primary"><i class="fa fa-list"></i> &nbsp;Цалингын жагсаалт</a>
+              </div>
+          </div>
+      </div>
+
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">
+          Нэр
+        </th>
+        <th class="text-center">
+          Овог
+        </th>
+        <th class="text-center">
+          Регистрийн дугаар
+        </th>
+        <th class="text-center">
+          Утасны дугаар
+        </th>
+        <th class="text-center">
+          Төрсөн өдөр
+        </th>
+        <th>
+
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+
+
+
+
+      {% for each in list %}
+      <tr class="link" onclick="window.document.location='{{each.pk}}';">
+        <td class="text-center">
+          {{each.fname}}
+        </td>
+        <td class="text-center">
+          {{each.lname}}
+        </td>
+        <td class="text-center">
+          {{each.register}}
+        </td>
+        <td class="text-center">
+          {{each.phone}}
+        </td>
+        <td class="text-center">
+          {{each.birthday}}
+        </td>
+        <td>
+          <div class="btn-group pull-right">
+            <a href="{% url 'teacher_edit' each.pk %}" class="btn btn-warning btn-sm">Засах</a>
+            <a href="{% url 'teacher_delete' each.pk %}" class="btn btn-alert btn-sm">Устгах</a>
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td class="text-center" colspan="6">
+          Хоосон байна.
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

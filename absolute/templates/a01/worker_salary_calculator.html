@@ -1,0 +1,89 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+
+
+<script  type="text/javascript">
+
+$( document ).ready(function() {
+
+    $('.link-formset').formset({
+        addText: 'Нэмэх',
+        deleteText: 'Устгах'
+    });
+
+});
+
+
+
+</script>
+
+<div class="container">
+
+  <h2>Цалин бодолт</h2><br>
+  <form method="post">
+    {% csrf_token %}
+    <div class="col-sm-5">
+    <div class="form-group">
+      {{ form.year.label_tag }}
+      {{ form.year }}
+    </div>
+      <div class="form-group">
+        {{ form.month.label_tag }}
+        {{ form.month }}
+      </div>
+      <div class="form-group">
+        {{ form.mshift.label_tag }}
+        {{ form.mshift }}
+      </div>
+
+          <div class="btn-toolbar">
+            <button class="btn btn-sm btn-info" type="submit">Хадгалах</button>
+            <a href="{% url 'worker' %}" class="btn btn-sm grey">Буцах</a>
+          </div>
+
+    </div>
+
+    <div class="col-sm-7">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ажилтан
+                    </th>
+                    <th>
+                        Цалин
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for each in salary_form %}
+                <tr class="link-formset">
+                    <td>
+                        {{ each.worker }}
+                    </td>
+                    <td>
+                        {{ each.wage }}
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ salary_form.management_form }}
+    </div>
+
+    </form>
+
+</div>
+{% if form.errors %}
+  <p>{{form.errors}}</p>
+{% endif %}
+
+{% endblock %}
